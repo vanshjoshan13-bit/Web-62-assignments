@@ -1,0 +1,32 @@
+# Student Task Manager - Bug Log
+
+## Project
+Student Task Manager
+
+## Version
+Release Candidate 1
+
+| Bug ID | Issue | Cause | Fix | Verification |
+|---|---|---|---|---|
+| BUG-01 | Empty task accepted | Missing validation | Trim and validate input | Test blank input |
+| BUG-02 | Tasks disappear after refresh | Data not saved | Use localStorage | Refresh browser |
+| BUG-03 | Incorrect completed count | Statistics not updated | Recalculate after changes | Complete a task |
+| BUG-04 | Filter shows wrong tasks | Incorrect filter condition | Fix filter logic | Test all filters |
+| BUG-05 | Editing creates duplicate | Edit mode not tracked | Track editingId | Edit an existing task |
+| BUG-06 | HTML-like title treated as markup | Unsafe HTML insertion | Use textContent | Enter HTML-like text |
+| BUG-07 | Invalid stored JSON breaks loading | Missing error handling | Use try/catch | Test invalid saved data |
+
+## Final Testing Checklist
+
+- [ ] Add task tested
+- [ ] Edit task tested
+- [ ] Delete task tested
+- [ ] Complete task tested
+- [ ] Filters tested
+- [ ] Refresh persistence tested
+- [ ] Mobile layout tested
+- [ ] All known bugs verified
+
+## Final Status
+Update after completing the actual tests.
+Do not mark a bug fixed until it has been verified.

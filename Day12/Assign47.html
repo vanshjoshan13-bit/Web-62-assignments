@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Storage Helper Demo</title>
+</head>
+<body>
+    <h2>Storage Helper</h2>
+    <button id="saveBtn">Save Data</button>
+    <button id="readBtn">Read Data</button>
+    <button id="removeBtn">Remove Data</button>
+
+    <p id="output"></p>
+
+    <script src="storage.js"></script>
+
+    <script>
+        const output = document.getElementById("output");
+
+        document.getElementById("saveBtn").addEventListener("click", () => {
+            const student = {
+                name: "Aman",
+                course: "Web Development",
+                completed: true
+            };
+
+            const saved = StorageHelper.save("student", student);
+
+            output.textContent = saved
+                ? "Student data saved."
+                : "Unable to save student data.";
+        });
+
+        document.getElementById("readBtn").addEventListener("click", () => {
+            const student = StorageHelper.get("student", {});
+
+            output.textContent = student.name
+                ? JSON.stringify(student)
+                : "No student data found.";
+        });
+
+        document.getElementById("removeBtn").addEventListener("click", () => {
+            StorageHelper.remove("student");
+            output.textContent = "Student data removed.";
+        });
+    </script>
+</body>
+</html>

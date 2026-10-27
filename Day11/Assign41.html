@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reading List</title>
+</head>
+<body>
+    <h2>My Reading List</h2>
+
+    <input id="bookInput" type="text" placeholder="Enter book name">
+    <button id="addBtn">Add Book</button>
+
+    <ul id="bookList"></ul>
+
+    <script>
+        const bookInput = document.getElementById("bookInput");
+        const addBtn = document.getElementById("addBtn");
+        const bookList = document.getElementById("bookList");
+
+        const books = [];
+
+        function renderBooks() {
+            bookList.replaceChildren();
+
+            books.forEach(book => {
+                const li = document.createElement("li");
+                li.textContent = book;
+                bookList.appendChild(li);
+            });
+        }
+
+        addBtn.addEventListener("click", function () {
+            const book = bookInput.value.trim();
+
+            if (book === "") {
+                alert("Please enter a book name.");
+                return;
+            }
+
+            books.push(book);
+            bookInput.value = "";
+            renderBooks();
+        });
+    </script>
+</body>
+</html>

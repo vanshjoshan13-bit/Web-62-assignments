@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Manager</title>
+    <link rel="stylesheet" href="task.css">
+    <script src="task.js" defer></script>
+</head>
+<body>
+
+<header>
+    <div class="wrapper">
+        <h1>StudyTasks</h1>
+        <p>Organize your study day, one task at a time.</p>
+    </div>
+</header>
+
+<main class="wrapper">
+    <section class="task-panel">
+        <h2>My Tasks</h2>
+
+        <form id="taskForm">
+            <label for="taskInput">New task</label>
+            <div class="form-row">
+                <input type="text" id="taskInput"
+                       placeholder="Enter your study task"
+                       required>
+                <button type="submit">Add Task</button>
+            </div>
+        </form>
+
+        <p id="status" aria-live="polite"></p>
+
+        <div class="statistics" id="statistics"></div>
+
+        <ul id="taskList"></ul>
+    </section>
+</main>
+
+<footer>
+    <p>Student Task Manager — Capstone Project</p>
+</footer>
+
+</body>
+</html>

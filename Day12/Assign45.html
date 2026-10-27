@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Storage Comparison</title>
+</head>
+<body>
+    <h2>Web Storage Demo</h2>
+
+    <button id="saveLocal">Save in localStorage</button>
+    <button id="readLocal">Read localStorage</button>
+    <button id="saveSession">Save in sessionStorage</button>
+    <button id="readSession">Read sessionStorage</button>
+
+    <p id="output"></p>
+
+    <script>
+        const output = document.getElementById("output");
+
+        document.getElementById("saveLocal").addEventListener("click", () => {
+            localStorage.setItem("username", "Aman");
+            output.textContent = "Saved in localStorage.";
+        });
+
+        document.getElementById("readLocal").addEventListener("click", () => {
+            output.textContent =
+                "localStorage: " +
+                (localStorage.getItem("username") || "No saved value");
+        });
+
+        document.getElementById("saveSession").addEventListener("click", () => {
+            sessionStorage.setItem("username", "Riya");
+            output.textContent = "Saved in sessionStorage.";
+        });
+
+        document.getElementById("readSession").addEventListener("click", () => {
+            output.textContent =
+                "sessionStorage: " +
+                (sessionStorage.getItem("username") || "No saved value");
+        });
+    </script>
+</body>
+</html>

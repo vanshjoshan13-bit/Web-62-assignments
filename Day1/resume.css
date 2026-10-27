@@ -1,0 +1,56 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px 15px;
+    font-family: Arial, sans-serif;
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+.resume {
+    max-width: 750px;
+    margin: auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px #00000020;
+}
+
+header {
+    text-align: center;
+    background-color: #0f766e;
+    color: white;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+section {
+    margin-top: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+h2 {
+    color: #0f766e;
+}
+
+ul {
+    padding-left: 25px;
+}
+
+li {
+    margin: 8px 0;
+}
+
+@media (max-width: 500px) {
+    .resume {
+        padding: 15px;
+    }
+}
+
+
+    

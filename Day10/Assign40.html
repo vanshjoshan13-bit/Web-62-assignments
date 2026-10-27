@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Cards</title>
+
+    <style>
+        #cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .card {
+            width: 180px;
+            padding: 15px;
+            border: 1px solid #999;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product Catalogue</h2>
+    <div id="cards"></div>
+
+    <script>
+        const products = [
+            { id: 1, name: "Laptop", price: 55000 },
+            { id: 2, name: "Mouse", price: 500 },
+            { id: 3, name: "Keyboard", price: 1200 }
+        ];
+
+        const cardsContainer = document.getElementById("cards");
+
+        // Reusable card-rendering function
+        function renderCard(product) {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const title = document.createElement("h3");
+            title.textContent = product.name;
+
+            const price = document.createElement("p");
+            price.textContent = "Price: ₹" + product.price;
+
+            const button = document.createElement("button");
+            button.textContent = "View Details";
+
+            button.addEventListener("click", function () {
+                alert(
+                    product.name + " - ₹" + product.price
+                );
+            });
+
+            card.append(title, price, button);
+
+            return card;
+        }
+
+        // Render all product cards
+        products.forEach(function (product) {
+            cardsContainer.appendChild(renderCard(product));
+        });
+    </script>
+</body>
+</html>

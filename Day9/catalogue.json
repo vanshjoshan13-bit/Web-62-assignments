@@ -1,0 +1,25 @@
+{
+  "catalogue": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "category": "Electronics",
+      "price": 55000,
+      "inStock": true
+    },
+    {
+      "id": 2,
+      "name": "Notebook",
+      "category": "Stationery",
+      "price": 100,
+      "inStock": true
+    },
+    {
+      "id": 3,
+      "name": "Headphones",
+      "category": "Electronics",
+      "price": 1500,
+      "inStock": false
+    }
+  ]
+}

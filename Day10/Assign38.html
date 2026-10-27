@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Profile</title>
+
+    <style>
+        .profile {
+            padding: 15px;
+            border: 2px solid gray;
+            border-radius: 8px;
+        }
+
+        .active {
+            border-color: green;
+            background-color: #eaffea;
+        }
+
+        .inactive {
+            border-color: gray;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>My Profile</h2>
+
+    <div id="profile" class="profile inactive">
+        <p>Name: Aman</p>
+        <p id="status">Status: Inactive</p>
+    </div>
+
+    <button id="toggleBtn" aria-pressed="false">
+        Activate Profile
+    </button>
+
+    <script>
+        const profile = document.getElementById("profile");
+        const status = document.getElementById("status");
+        const toggleBtn = document.getElementById("toggleBtn");
+
+        toggleBtn.addEventListener("click", function () {
+            const isActive = profile.classList.contains("active");
+
+            profile.classList.toggle("active", !isActive);
+            profile.classList.toggle("inactive", isActive);
+
+            status.textContent = !isActive
+                ? "Status: Active"
+                : "Status: Inactive";
+
+            toggleBtn.textContent = !isActive
+                ? "Deactivate Profile"
+                : "Activate Profile";
+
+            toggleBtn.setAttribute("aria-pressed", String(!isActive));
+        });
+    </script>
+</body>
+</html>

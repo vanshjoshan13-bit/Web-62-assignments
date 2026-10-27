@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Form</title>
+</head>
+<body>
+    <h2>Profile Form</h2>
+
+    <form id="profileForm">
+        <label for="name">Name:</label>
+        <input id="name" type="text" required>
+
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input id="email" type="email" required>
+
+        <br><br>
+
+        <button type="submit">Submit Profile</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <p id="message" aria-live="polite"></p>
+
+    <script>
+        const form = document.getElementById("profileForm");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const message = document.getElementById("message");
+
+        // Event map
+        const eventMap = {
+            submit: function (event) {
+                event.preventDefault();
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+
+                if (name === "" || email === "") {
+                    message.textContent = "Please fill in all fields.";
+                    return;
+                }
+
+                message.textContent =
+                    "Profile submitted successfully for " + name + ".";
+            },
+
+            reset: function () {
+                message.textContent = "";
+            }
+        };
+
+        form.addEventListener("submit", eventMap.submit);
+        form.addEventListener("reset", eventMap.reset);
+    </script>
+</body>
+</html>

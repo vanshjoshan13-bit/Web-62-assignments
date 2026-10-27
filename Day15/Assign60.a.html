@@ -1,0 +1,13 @@
+## System Architecture Overview
+
+1. Presentation Layer (HTML5/CSS3)
+   - Mobile-first responsive layout utilizing CSS Custom Properties for theme tokens.
+   - Semantic HTML elements (`<main>`, `<header>`, `<section>`) ensuring accessibility (a11y).
+
+2. Logic & State Management Layer (ES6 Modules)
+   - Modular JavaScript breakdown splitting concerns between Data Processing (`processUserData`) and Web Storage Handling (`StorageUtil`).
+   - Unidirectional data flow: User Action -> Logic Processing -> LocalStorage Sync -> DOM Render.
+
+3. Resilience & Error Handling
+   - Defensive validation against `null`, `undefined`, or malformed input types.
+   - `try-catch` wrappers surrounding all Web Storage interactions to gracefully catch private browsing / restricted access errors.

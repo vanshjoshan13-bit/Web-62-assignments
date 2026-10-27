@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Settings</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .dark {
+            background: #222;
+            color: white;
+        }
+
+        input, select, button {
+            padding: 8px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Settings Panel</h2>
+
+    <label for="username">Name:</label>
+    <input id="username" type="text" placeholder="Enter your name">
+
+    <br>
+
+    <label for="theme">Theme:</label>
+    <select id="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+    </select>
+
+    <br>
+
+    <button id="saveBtn">Save Settings</button>
+
+    <p id="message" aria-live="polite"></p>
+
+    <script>
+        const username = document.getElementById("username");
+        const theme = document.getElementById("theme");
+        const message = document.getElementById("message");
+
+        function loadSettings() {
+            username.value = localStorage.getItem("settingsName") || "";
+            theme.value = localStorage.getItem("settingsTheme") || "light";
+
+            document.body.classList.toggle(
+                "dark",
+                theme.value === "dark"
+            );
+        }
+
+        document.getElementById("saveBtn").addEventListener("click", () => {
+            localStorage.setItem("settingsName", username.value.trim());
+            localStorage.setItem("settingsTheme", theme.value);
+
+            document.body.classList.toggle(
+                "dark",
+                theme.value === "dark"
+            );
+
+            message.textContent = "Settings saved successfully!";
+        });
+
+        loadSettings();
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Storage Lifecycle</title>
+</head>
+<body>
+    <h2>Counter App</h2>
+
+    <p id="count">Count: 0</p>
+    <button id="increaseBtn">Increase</button>
+    <button id="resetBtn">Reset</button>
+
+    <script>
+        const countDisplay = document.getElementById("count");
+        const increaseBtn = document.getElementById("increaseBtn");
+        const resetBtn = document.getElementById("resetBtn");
+
+        let count = 0;
+
+        // 1. LOAD: Read saved data from localStorage.
+        function load() {
+            const savedCount = Number(localStorage.getItem("counter"));
+
+            count = Number.isInteger(savedCount) && savedCount >= 0
+                ? savedCount
+                : 0;
+        }
+
+        // 2. SAVE: Store the updated value.
+        function save() {
+            localStorage.setItem("counter", String(count));
+        }
+
+        // 3. RENDER: Display the current value.
+        function render() {
+            countDisplay.textContent = "Count: " + count;
+        }
+
+        // 4. UPDATE: Change the value after user interaction.
+        increaseBtn.addEventListener("click", () => {
+            count++;
+            save();
+            render();
+        });
+
+        resetBtn.addEventListener("click", () => {
+            count = 0;
+            save();
+            render();
+        });
+
+        // Initial lifecycle
+        load();
+        render();
+    </script>
+</body>
+</html>

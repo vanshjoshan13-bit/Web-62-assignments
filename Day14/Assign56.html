@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 14 - Test Matrix</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px auto;
+      max-width: 850px;
+      padding: 15px;
+      background: #f1f5f9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th { background: #e0e7ff; }
+    .pass { color: green; font-weight: bold; }
+    .fail { color: red; font-weight: bold; }
+
+    button {
+      padding: 10px 16px;
+      background: #4f46e5;
+      color: white;
+      border: 0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Automated Test Matrix</h1>
+  <button id="runTests">Run All Tests</button>
+  <p id="summary" aria-live="polite">Click to run tests.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Test</th>
+        <th>Expected</th>
+        <th>Actual</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="results"></tbody>
+  </table>
+
+  <script>
+    function validateTitle(title) {
+      return typeof title === "string" &&
+        title.trim().length > 0 &&
+        title.trim().length <= 100;
+    }
+
+    function getStats(tasks) {
+      return {
+        total: tasks.length,
+        completed: tasks.filter(task => task.completed).length,
+        pending: tasks.filter(task => !task.completed).length
+      };
+    }
+
+    const tests = [
+      {
+        name: "Valid title",
+        expected: true,
+        run: () => validateTitle("Study Java")
+      },
+      {
+        name: "Empty title",
+        expected: false,
+        run: () => validateTitle("")
+      },
+      {
+        name: "Spaces-only title",
+        expected: false,
+        run: () => validateTitle("   ")
+      },
+      {
+        name: "Title with spaces",
+        expected: true,
+        run: () => validateTitle("  Learn CSS  ")
+      },
+      {
+        name: "Title over 100 characters",
+        expected: false,
+        run: () => validateTitle("A".repeat(101))
+      },
+      {
+        name: "Task statistics",
+        expected: { total: 3, completed: 1, pending: 2 },
+        run: () => getStats([
+          { completed: true },
+          { completed: false },
+          { completed: false }
+        ])
+      },
+      {
+        name: "Empty task list",
+        expected: { total: 0, completed: 0, pending: 0 },
+        run: () => getStats([])
+      }
+    ];
+
+    function equal(a, b) {
+      return JSON.stringify(a) === JSON.stringify(b);
+    }
+
+    document.getElementById("runTests").addEventListener("click", () => {
+      const tbody = document.getElementById("results");
+      tbody.replaceChildren();
+
+      let passed = 0;
+
+      tests.forEach(test => {
+        let actual;
+        let success = false;
+
+        try {
+          actual = test.run();
+          success = equal(actual, test.expected);
+        } catch (error) {
+          actual = error.message;
+        }
+
+        if (success) passed++;
+
+        const row = document.createElement("tr");
+        const values = [
+          test.name,
+          JSON.stringify(test.expected),
+          JSON.stringify(actual),
+          success ? "PASS" : "FAIL"
+        ];
+
+        values.forEach((value, index) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+
+          if (index === 3) {
+            cell.className = success ? "pass" : "fail";
+          }
+
+          row.appendChild(cell);
+        });
+
+        tbody.appendChild(row);
+      });
+
+      document.getElementById("summary").textContent =
+        `${passed} / ${tests.length} tests passed`;
+    });
+  </script>
+</body>
+</html>

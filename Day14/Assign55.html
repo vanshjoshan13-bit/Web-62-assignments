@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Task Manager</title>
+  <link rel="stylesheet" href="assign55.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <p class="eyebrow">STUDENT PRODUCTIVITY</p>
+      <h1>Student Task Manager</h1>
+      <p>Organize your study goals, one task at a time.</p>
+    </header>
+
+    <section class="stats" aria-label="Task statistics">
+      <article class="stat">
+        <span>Total Tasks</span>
+        <strong id="totalCount">0</strong>
+      </article>
+      <article class="stat">
+        <span>Pending</span>
+        <strong id="pendingCount">0</strong>
+      </article>
+      <article class="stat">
+        <span>Completed</span>
+        <strong id="completedCount">0</strong>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2 id="formHeading">Add a task</h2>
+      <form id="taskForm">
+        <label for="taskTitle">Task title</label>
+        <input
+          id="taskTitle"
+          type="text"
+          maxlength="100"
+          placeholder="e.g. Complete HTML assignment"
+          required
+        >
+        <p id="formMessage" class="message" aria-live="polite"></p>
+        <div class="form-actions">
+          <button id="saveButton" type="submit">Add Task</button>
+          <button id="cancelButton" type="button" class="secondary" hidden>
+            Cancel Edit
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="list-heading">
+        <h2>Your tasks</h2>
+        <label for="taskFilter">Show:
+          <select id="taskFilter">
+            <option value="all">All tasks</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+      </div>
+
+      <ul id="taskList" class="task-list"></ul>
+      <p id="emptyMessage">No tasks yet. Add your first task above!</p>
+      <p id="listMessage" class="message" aria-live="polite"></p>
+    </section>
+
+    <footer>Progress starts with one small task.</footer>
+  </main>
+</body>
+</html>

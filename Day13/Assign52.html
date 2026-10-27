@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Manager</title>
+    <link rel="stylesheet" href="Student.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="wrapper header-content">
+            <h1>StudyTasks</h1>
+            <nav aria-label="Main navigation">
+                <a href="#home">Home</a>
+                <a href="#tasks">My Tasks</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrapper" id="home">
+        <section class="hero">
+            <h2>Plan your study day</h2>
+            <p>Keep your assignments organized and track your progress.</p>
+        </section>
+
+        <section class="task-panel" id="tasks">
+            <h2>My Tasks</h2>
+            <p id="appStatus" aria-live="polite">
+                Your task manager is ready.
+            </p>
+
+            <div id="taskArea">
+                <p>Your task list will appear here.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Student Task Manager — Capstone Project</p>
+    </footer>
+
+</body>
+</html>

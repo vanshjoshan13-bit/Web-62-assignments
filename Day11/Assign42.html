@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Form</title>
+</head>
+<body>
+    <h2>Contact Us</h2>
+
+    <form id="contactForm">
+        <label for="name">Name:</label>
+        <input id="name" type="text" required>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input id="email" type="email" required>
+        <br><br>
+
+        <label for="messageInput">Message:</label>
+        <textarea id="messageInput" required></textarea>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Submission Summary</h3>
+    <div id="summary" aria-live="polite"></div>
+
+    <script>
+        const form = document.getElementById("contactForm");
+        const summary = document.getElementById("summary");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("messageInput").value.trim();
+
+            if (!name || !email || !message) {
+                summary.textContent = "Please fill in all fields.";
+                return;
+            }
+
+            summary.replaceChildren();
+
+            const details = [
+                ["Name: ", name],
+                ["Email: ", email],
+                ["Message: ", message]
+            ];
+
+            details.forEach(([label, value]) => {
+                const p = document.createElement("p");
+                const strong = document.createElement("strong");
+
+                strong.textContent = label;
+                p.append(strong, document.createTextNode(value));
+                summary.appendChild(p);
+            });
+        });
+    </script>
+</body>
+</html>

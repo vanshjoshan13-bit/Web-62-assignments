@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent To-Do App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 15px;
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 4px;
+        }
+
+        li {
+            margin: 12px 0;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h2>My To-Do App</h2>
+
+    <input id="taskInput" type="text" placeholder="Enter a task">
+    <button id="addBtn">Add Task</button>
+
+    <ul id="taskList"></ul>
+    <p id="summary" aria-live="polite"></p>
+
+    <script>
+        const taskInput = document.getElementById("taskInput");
+        const addBtn = document.getElementById("addBtn");
+        const taskList = document.getElementById("taskList");
+        const summary = document.getElementById("summary");
+
+        function loadTasks() {
+            try {
+                const saved = JSON.parse(
+                    localStorage.getItem("todoTasks") || "[]"
+                );
+
+                if (!Array.isArray(saved)) {
+                    return [];
+                }
+
+                return saved.filter(task =>
+                    task &&
+                    Number.isInteger(task.id) &&
+                    typeof task.text === "string" &&
+                    typeof task.completed === "boolean"
+                );
+            } catch (error) {
+                return [];
+            }
+        }
+
+        let tasks = loadTasks();
+        let nextId = tasks.reduce(
+            (max, task) => Math.max(max, task.id), 0
+        ) + 1;
+
+        function saveTasks() {
+            try {
+                localStorage.setItem("todoTasks", JSON.stringify(tasks));
+                return true;
+            } catch (error) {
+                alert("Unable to save tasks in browser storage.");
+                return false;
+            }
+        }
+
+        function renderTasks() {
+            taskList.replaceChildren();
+
+            tasks.forEach(task => {
+                const li = document.createElement("li");
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = task.completed;
+                checkbox.setAttribute("aria-label", "Complete " + task.text);
+
+                const span = document.createElement("span");
+                span.textContent = task.text;
+
+                if (task.completed) {
+                    span.className = "completed";
+                }
+
+                checkbox.addEventListener("change", () => {
+                    task.completed = checkbox.checked;
+
+                    if (saveTasks()) {
+                        renderTasks();
+                    }
+                });
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Delete";
+
+                deleteBtn.addEventListener("click", () => {
+                    const oldTasks = tasks;
+                    tasks = tasks.filter(item => item.id !== task.id);
+
+                    if (saveTasks()) {
+                        renderTasks();
+                    } else {
+                        tasks = oldTasks;
+                    }
+                });
+
+                li.append(checkbox, span, deleteBtn);
+                taskList.appendChild(li);
+            });
+
+            const completed = tasks.filter(task => task.completed).length;
+
+            summary.textContent =
+                `Total: ${tasks.length} | Completed: ${completed} | Pending: ${tasks.length - completed}`;
+        }
+
+        function addTask() {
+            const text = taskInput.value.trim();
+
+            if (!text) {
+                alert("Please enter a task.");
+                return;
+            }
+
+            const task = {
+                id: nextId++,
+                text: text,
+                completed: false
+            };
+
+            tasks.push(task);
+
+            if (saveTasks()) {
+                taskInput.value = "";
+                renderTasks();
+            } else {
+                tasks.pop();
+            }
+        }
+
+        addBtn.addEventListener("click", addTask);
+
+        taskInput.addEventListener("keydown", event => {
+            if (event.key === "Enter") {
+                addTask();
+            }
+        });
+
+        renderTasks();
+    </script>
+</body>
+</html>

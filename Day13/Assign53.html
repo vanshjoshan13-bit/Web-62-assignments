@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Architecture Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            padding: 25px;
+            line-height: 1.6;
+        }
+        main {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        h1, h2 {
+            color: #1d4ed8;
+        }
+        code {
+            background: #e2e8f0;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Student Task Manager — Architecture Notes</h1>
+
+    <h2>1. Project Structure</h2>
+    <ul>
+        <li><code>index.html</code> — webpage structure</li>
+        <li><code>style.css</code> — design and responsive layout</li>
+        <li><code>script.js</code> — application logic and event handling</li>
+        <li><code>taskUtils.js</code> — reusable task utility functions</li>
+    </ul>
+
+    <h2>2. Application Flow</h2>
+    <ol>
+        <li>The HTML file creates the interface.</li>
+        <li>The CSS file styles the interface.</li>
+        <li>JavaScript receives user actions.</li>
+        <li>Utility functions validate and process task data.</li>
+        <li>The interface updates to display the latest task list.</li>
+    </ol>
+
+    <h2>3. Data Structure</h2>
+    <p>Each task is stored as a JavaScript object:</p>
+    <pre>{
+  id: 1,
+  title: "Complete assignment",
+  completed: false
+}</pre>
+
+    <h2>4. Validation Rules</h2>
+    <ul>
+        <li>Task titles cannot be empty.</li>
+        <li>Every task must have a unique ID.</li>
+        <li>The completed property must be a boolean.</li>
+    </ul>
+
+    <h2>5. Future Improvements</h2>
+    <ul>
+        <li>Save tasks using localStorage.</li>
+        <li>Add edit and filter options.</li>
+        <li>Provide automated test cases.</li>
+    </ul>
+</main>
+</body>
+</html>

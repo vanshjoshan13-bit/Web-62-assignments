@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validation Test Matrix</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Contact Form Validation Test Matrix</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Case</th>
+                <th>Input</th>
+                <th>Expected Result</th>
+                <th>Actual Result</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="results"></tbody>
+    </table>
+
+    <script>
+        function validateForm(name, email) {
+            if (!name.trim()) {
+                return "Name is required";
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+                return "Invalid email";
+            }
+
+            return "Valid";
+        }
+
+        const tests = [
+            {
+                name: "Aman",
+                email: "aman@gmail.com",
+                expected: "Valid"
+            },
+            {
+                name: "",
+                email: "aman@gmail.com",
+                expected: "Name is required"
+            },
+            {
+                name: "Riya",
+                email: "invalid-email",
+                expected: "Invalid email"
+            },
+            {
+                name: "Riya",
+                email: "riya@example.com",
+                expected: "Valid"
+            }
+        ];
+
+        const results = document.getElementById("results");
+
+        tests.forEach((test, index) => {
+            const actual = validateForm(test.name, test.email);
+            const passed = actual === test.expected;
+
+            const row = document.createElement("tr");
+
+            [
+                index + 1,
+                `Name: ${test.name || "(empty)"}, Email: ${test.email}`,
+                test.expected,
+                actual,
+                passed ? "PASS" : "FAIL"
+            ].forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            results.appendChild(row);
+        });
+    </script>
+</body>
+</html>

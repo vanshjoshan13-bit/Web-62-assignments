@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Updater</title>
+</head>
+<body>
+    <h2>Update Profile</h2>
+
+    <input id="nameInput" type="text" placeholder="Enter your name">
+    <button id="updateBtn">Update</button>
+
+    <p id="profile">Your name will appear here.</p>
+
+    <script>
+        const nameInput = document.getElementById("nameInput");
+        const updateBtn = document.getElementById("updateBtn");
+        const profile = document.getElementById("profile");
+
+        updateBtn.addEventListener("click", function () {
+            const name = nameInput.value.trim();
+
+            if (name === "") {
+                profile.textContent = "Please enter your name.";
+                return;
+            }
+
+            // textContent prevents the input from being treated as HTML
+            profile.textContent = "Welcome, " + name + "!";
+        });
+    </script>
+</body>
+</html>
